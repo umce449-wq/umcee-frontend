@@ -90,3 +90,5 @@ body {
     grid-template-columns: 1fr 1fr !important;
   }
 }
+
+@media(max-width:768px){div[style*='repeat(5,1fr)']{grid-template-columns:repeat(2,1fr)!important;}div[style*='1.8fr 1fr']{grid-template-columns:1fr!important;}div[style*='1fr 1fr 1fr']{grid-template-columns:1fr!important;}div[style*='repeat(3,1fr)']{grid-template-columns:1fr!important;}div[style*='padding:20']{padding:12px!important;}}@media(max-width:480px){div[style*='repeat(5,1fr)']{grid-template-columns:1fr 1fr!important;}}
