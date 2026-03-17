@@ -273,6 +273,13 @@ function Settings({t,currency,setCurrency,lang,setLang,country,setCountry,notify
 
 // ROOT APP
 export default function App(){
+  const[isMob,setIsMob]=useState(false);
+  useEffect(()=>{
+    const fn=()=>setIsMob(window.innerWidth<=900);
+    fn();
+    window.addEventListener("resize",fn);
+    return()=>window.removeEventListener("resize",fn);
+  },[]);
   const[tab,setTab]=useState("overview");
   const[lang,setLang]=useState("en");
   const[currency,setCurrency]=useState("USD");
@@ -336,7 +343,20 @@ export default function App(){
           .umcem-welcome-title{font-size:13px!important;}
         }`}</style>
       {toast&&<Toast msg={toast.msg} type={toast.type}/>}
-      <Sidebar tab={tab} setTab={setTab} open={sbOpen} setOpen={setSbOpen} t={t} badges={badges}/>
+      {isMob&&sbOpen&&(
+        <div onClick={()=>setSbOpen(false)}
+          style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.7)",
+            zIndex:299,backdropFilter:"blur(4px)"}}/>
+      )}
+      <div style={{
+        position:isMob?"fixed":"sticky",
+        top:0,left:0,height:"100vh",zIndex:300,
+        flexShrink:0,
+        transform:isMob?(sbOpen?"translateX(0)":"translateX(-100%)"):"none",
+        transition:"transform .25s ease",
+      }}>
+        <Sidebar tab={tab} setTab={setTab} open={sbOpen} setOpen={setSbOpen} t={t} badges={badges}/>
+      </div>
       <div style={{flex:1,display:"flex",flexDirection:"column",minWidth:0,overflow:"hidden"}}>
         <Topbar tab={tab} t={t} lang={lang} setLang={setLang} currency={currency} setCurrency={setCurrency} country={country} setCountry={setCountry}/>
         <div style={{flex:1,overflowY:"auto"}}>{pages[tab]||pages.overview}</div>
@@ -344,4 +364,5 @@ export default function App(){
     </div>
   );
 }
+
 
