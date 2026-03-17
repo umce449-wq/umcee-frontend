@@ -1,32 +1,29 @@
-﻿import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
-  title: "UMCEM - منصة إدارة التجارة الإلكترونية #1",
-  description: "أدر فريقك وحلل أرباحك وتحكم في مشروعك التجاري. ابدأ بـ 50 طلب مجاناً بدون رسوم. UMCEM منصة التجارة الإلكترونية الأولى.",
+  title: "UMCEM — Unified Commerce Management",
+  description: "Professional SaaS platform for ecommerce management.",
+  authors: [{ name: "UMCEM" }],
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#000000",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet" />
+      </head>
+      <body style={{ margin: 0, padding: 0, background: "#000", overflowX: "hidden",
+        fontFamily: "Geist, system-ui, -apple-system, sans-serif",
+        WebkitFontSmoothing: "antialiased" }}>
         {children}
       </body>
     </html>
