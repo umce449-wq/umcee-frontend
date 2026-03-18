@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 /* UMCEM Dashboard v3.0 — Vercel-quality design */
